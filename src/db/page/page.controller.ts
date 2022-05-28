@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
 import { PageService } from './page.service';
 import { Page } from './page.entity';
 import { CreatePageDto } from './page.dto';
@@ -24,7 +24,12 @@ export class PageController {
   }
 
   @Post()
-  addPage(@Body() data: CreatePageDto): Promise<Page> {
+  add(@Body() data: CreatePageDto): Promise<Page> {
     return this.pageService.create(data);
+  }
+
+  @Put('/:id')
+  edit(@Param('id') id: number, @Body() data: CreatePageDto): Promise<Page> {
+    return this.pageService.edit(id, data);
   }
 }

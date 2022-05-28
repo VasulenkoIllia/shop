@@ -22,4 +22,15 @@ export class PageService {
   create(data: CreatePageDto): Promise<Page> {
     return this.pageRepository.save(data);
   }
+
+  async edit(id: number, data: CreatePageDto): Promise<Page> {
+    const page = await this.pageRepository.findOne(id);
+    if (!page) {
+      throw new Error('Page do not found');
+    }
+    return this.pageRepository.save({
+      ...page,
+      ...data,
+    });
+  }
 }
