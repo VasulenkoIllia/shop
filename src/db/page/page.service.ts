@@ -7,10 +7,10 @@ import { Page } from './page.entity';
 export class PageService {
   constructor(
     @InjectRepository(Page)
-    private readonly photoRepository: Repository<Page>,
+    private readonly pageRepository: Repository<Page>,
   ) {}
 
   findAll(): Promise<Page[]> {
-    return this.photoRepository.find();
+    return this.pageRepository.find();
   }
 }

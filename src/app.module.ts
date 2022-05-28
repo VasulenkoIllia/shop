@@ -3,6 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Page } from './db/page/page.entity';
+import { PageHttpModule } from './db/page/page-http.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { Page } from './db/page/page.entity';
       entities: [Page],
       synchronize: true,
     }),
+    PageHttpModule,
   ],
   controllers: [AppController],
   providers: [AppService],
