@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Page } from './page.entity';
 import { CreatePageDto } from './page.dto';
+import { SuccessDto } from '../../dto/success.dto';
 
 @Injectable()
 export class PageService {
@@ -32,5 +33,16 @@ export class PageService {
       ...page,
       ...data,
     });
+  }
+
+  async delete(id: number): Promise<SuccessDto> {
+    const page = await this.pageRepository.findOne(id);
+    if (!page) {
+      throw new Error('Page do not found');
+    }
+    const result = await this.pageRepository.delete(id);
+    return {
+      success: result.affected > 0,
+    };
   }
 }

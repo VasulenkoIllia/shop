@@ -1,8 +1,17 @@
-import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
 import { PageService } from './page.service';
 import { Page } from './page.entity';
 import { CreatePageDto } from './page.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { SuccessDto } from '../../dto/success.dto';
 
 @ApiTags('page')
 @Controller('page')
@@ -31,5 +40,10 @@ export class PageController {
   @Put('/:id')
   edit(@Param('id') id: number, @Body() data: CreatePageDto): Promise<Page> {
     return this.pageService.edit(id, data);
+  }
+
+  @Delete('/:id')
+  delete(@Param('id') id: number): Promise<SuccessDto> {
+    return this.pageService.delete(id);
   }
 }
