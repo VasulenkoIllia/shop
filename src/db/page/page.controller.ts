@@ -12,7 +12,7 @@ export class PageController {
   }
 
   @Get('/:id')
-  async findById(@Param() id: number): Promise<Page> {
+  async findById(@Param('id') id: number): Promise<Page> {
     const page = await this.pageService.findById(id);
     if (page) {
       return page;
