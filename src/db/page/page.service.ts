@@ -13,4 +13,8 @@ export class PageService {
   findAll(): Promise<Page[]> {
     return this.pageRepository.find();
   }
+
+  findById(id: number): Promise<Page> {
+    return this.pageRepository.findOne(id);
+  }
 }
