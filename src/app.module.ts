@@ -4,6 +4,8 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Page } from './db/page/page.entity';
 import { PageHttpModule } from './db/page/page-http.module';
+import { CategoryHttpModule } from './db/category/category-http.module';
+import { Category } from './db/category/category.entity';
 
 @Module({
   imports: [
@@ -14,10 +16,11 @@ import { PageHttpModule } from './db/page/page-http.module';
       username: 'shop',
       password: 'shop',
       database: 'shop',
-      entities: [Page],
+      entities: [Page, Category],
       synchronize: true,
     }),
     PageHttpModule,
+    CategoryHttpModule,
   ],
   controllers: [AppController],
   providers: [AppService],
