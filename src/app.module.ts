@@ -6,6 +6,8 @@ import { Page } from './db/page/page.entity';
 import { PageHttpModule } from './db/page/page-http.module';
 import { CategoryHttpModule } from './db/category/category-http.module';
 import { Category } from './db/category/category.entity';
+import { CustomersModule } from './customers/customers.module';
+import { Customer } from './customers/entities/customer.entity';
 
 @Module({
   imports: [
@@ -16,11 +18,12 @@ import { Category } from './db/category/category.entity';
       username: 'shop',
       password: 'shop',
       database: 'shop',
-      entities: [Page, Category],
+      entities: [Page, Category, Customer],
       synchronize: true,
     }),
     PageHttpModule,
     CategoryHttpModule,
+    CustomersModule,
   ],
   controllers: [AppController],
   providers: [AppService],
