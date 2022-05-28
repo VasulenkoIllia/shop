@@ -9,38 +9,38 @@ import { Customer } from './entities/customer.entity';
 export class CustomersService {
   constructor(
     @InjectRepository(Customer)
-    private readonly customerRepository: Repository<Customer>,
+    private readonly repository: Repository<Customer>,
   ) {}
 
   create(createCustomerDto: CreateCustomerDto) {
-    return this.customerRepository.save(createCustomerDto);
+    return this.repository.save(createCustomerDto);
   }
 
   findAll() {
-    return this.customerRepository.find();
+    return this.repository.find();
   }
 
   findOne(id: number) {
-    return this.customerRepository.findOne(id);
+    return this.repository.findOne(id);
   }
 
   async update(id: number, updateCustomerDto: UpdateCustomerDto) {
-    const customer = await this.customerRepository.findOne(id);
+    const customer = await this.repository.findOne(id);
     if (!customer) {
       throw new Error('Customer do not found');
     }
-    return this.customerRepository.save({
+    return this.repository.save({
       ...customer,
       ...updateCustomerDto,
     });
   }
 
   async remove(id: number) {
-    const customer = await this.customerRepository.findOne(id);
+    const customer = await this.repository.findOne(id);
     if (!customer) {
       throw new Error('Customer do not found');
     }
-    const result = await this.customerRepository.delete(id);
+    const result = await this.repository.delete(id);
     return {
       success: result.affected > 0,
     };
