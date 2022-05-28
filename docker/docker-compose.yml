@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  meat-shop-db:
+    image: mysql:5
+    container_name: meat-shop-db
+    environment:
+      MYSQL_ROOT_PASSWORD: shop
+      MYSQL_USER: shop
+      MYSQL_DATABASE: shop
+      MYSQL_PASSWORD: shop
+    stdin_open: true
+    tty: true
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./data:/var/lib/mysql
