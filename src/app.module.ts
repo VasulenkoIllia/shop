@@ -10,6 +10,9 @@ import { CustomersModule } from './db/customers/customers.module';
 import { Customer } from './db/customers/entities/customer.entity';
 import { ItemsModule } from './db/items/items.module';
 import { Items } from './db/items/entities/item.entity';
+import { ImageItemModule } from './db/image-item/image-item.module';
+import { ImageItemEntity } from "./db/image-item/image.item.entity";
+import { OrderModule } from './db/order/order.module';
 
 @Module({
   imports: [
@@ -20,13 +23,15 @@ import { Items } from './db/items/entities/item.entity';
       username: 'shop',
       password: 'shop',
       database: 'shop',
-      entities: [Page, Category, Customer, Items],
+      entities: [Page, Category, Customer, Items, ImageItemEntity],
       synchronize: true,
     }),
     PageHttpModule,
     CategoryHttpModule,
     CustomersModule,
     ItemsModule,
+    ImageItemModule,
+    OrderModule,
   ],
   controllers: [AppController],
   providers: [AppService],
