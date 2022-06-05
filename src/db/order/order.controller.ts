@@ -12,6 +12,7 @@ export class OrderController {
 
   @Post()
   create(@Body() createOrderDto: CreateOrderDto) {
+
     return this.orderService.create(createOrderDto);
   }
 
@@ -25,12 +26,12 @@ export class OrderController {
     return this.orderService.findOne(+id);
   }
 
-  @Patch("id")
+  @Patch("/:id")
   update(@Param("id") id: string, @Body() updateOrderDto: UpdateOrderDto) {
     return this.orderService.update(+id, updateOrderDto);
   }
 
-  @Delete("id")
+  @Delete("/:id")
   remove(@Param("id") id: string) {
     return this.orderService.remove(+id);
   }

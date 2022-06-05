@@ -60,11 +60,11 @@ export class OrderService {
   }
 
   findAll() {
-    return this.repository.find({ relations: ["customer"] });
+    return this.repository.find({ relations: ["customer", "items", "items.item"] });
   }
 
   findOne(id: number) {
-    return this.repository.findOne(id, { relations: ["customer"] });
+    return this.repository.findOne(id, { relations: ["customer", "items", "items.item"] });
   }
 
   async update(id: number, updateOrderDto: UpdateOrderDto) {
