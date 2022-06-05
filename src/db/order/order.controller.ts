@@ -20,7 +20,7 @@ export class OrderController {
     return this.orderService.findAll();
   }
 
-  @Get(":id")
+  @Get("/:id")
   findOne(@Param("id") id: string) {
     return this.orderService.findOne(+id);
   }

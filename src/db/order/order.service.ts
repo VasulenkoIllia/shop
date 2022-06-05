@@ -86,6 +86,7 @@ export class OrderService {
   }
 
   async remove(id: number) {
+
     const order = await this.repository.findOne(id);
     if (!order) {
       throw new Error("order do not found");

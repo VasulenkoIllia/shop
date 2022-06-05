@@ -14,7 +14,7 @@ import { ImageItemModule } from "./db/image-item/image-item.module";
 import { ImageItemEntity } from "./db/image-item/image.item.entity";
 import { OrderModule } from "./db/order/order.module";
 import { OrderEntity } from "./db/order/order.entity";
-import { OrderItemModule } from './db/order-item/order-item.module';
+import { OrderItemModule } from "./db/order-item/order-item.module";
 import { OrderItemEntity } from "./db/order-item/order-item.entity";
 
 @Module({
@@ -26,7 +26,7 @@ import { OrderItemEntity } from "./db/order-item/order-item.entity";
       username: "shop",
       password: "shop",
       database: "shop",
-      entities: [Page, Category, Customer, Items, ImageItemEntity, OrderEntity],
+      entities: [Page, Category, Customer, Items, ImageItemEntity, OrderEntity, OrderItemEntity],
       synchronize: true
     }),
     PageHttpModule,
