@@ -16,6 +16,7 @@ import { OrderModule } from "./db/order/order.module";
 import { OrderEntity } from "./db/order/order.entity";
 import { OrderItemModule } from "./db/order-item/order-item.module";
 import { OrderItemEntity } from "./db/order-item/order-item.entity";
+import { PhotoModule } from './db/photo/photo.module';
 
 @Module({
   imports: [
@@ -35,7 +36,9 @@ import { OrderItemEntity } from "./db/order-item/order-item.entity";
     ItemsModule,
     ImageItemModule,
     OrderModule,
-    OrderItemModule
+    OrderItemModule,
+    PhotoModule,
+
   ],
   controllers: [AppController],
   providers: [AppService]
