@@ -17,6 +17,7 @@ import { OrderEntity } from "./db/order/order.entity";
 import { OrderItemModule } from "./db/order-item/order-item.module";
 import { OrderItemEntity } from "./db/order-item/order-item.entity";
 import { PhotoModule } from './db/photo/photo.module';
+import { MulterModule } from "@nestjs/platform-express";
 
 @Module({
   imports: [
@@ -38,6 +39,9 @@ import { PhotoModule } from './db/photo/photo.module';
     OrderModule,
     OrderItemModule,
     PhotoModule,
+    MulterModule.register({
+      dest: './files',
+    })
 
   ],
   controllers: [AppController],
