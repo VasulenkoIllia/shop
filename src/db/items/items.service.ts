@@ -33,7 +33,7 @@ export class ItemsService {
   }
 
   findOne(id: number) {
-    return this.repository.findOne(id);
+    return this.repository.findOne(id, {relations: ['images']});
   }
 
   async update(id: number, updateCustomerDto: UpdateItemDto) {

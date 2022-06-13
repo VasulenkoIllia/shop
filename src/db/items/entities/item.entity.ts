@@ -3,9 +3,11 @@ import {
   Column,
   PrimaryGeneratedColumn,
   OneToOne,
-  JoinColumn,
+  JoinColumn, OneToMany,
 } from 'typeorm';
 import { Category } from '../../category/category.entity';
+import {ImageItemEntity} from "../../image-item/image.item.entity";
+import {OrderEntity} from "../../order/order.entity";
 
 @Entity()
 export class Items {
@@ -27,4 +29,7 @@ export class Items {
   @OneToOne(() => Category)
   @JoinColumn()
   category: Category;
+
+  @OneToMany(() => ImageItemEntity, image => image.item)
+  images: ImageItemEntity[];
 }

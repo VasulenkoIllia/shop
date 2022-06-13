@@ -1,10 +1,29 @@
-import { Controller, Post, UploadedFile, UseInterceptors } from "@nestjs/common";
+import {
+  CallHandler,
+  Controller,
+  ExecutionContext,
+  Injectable,
+  NestInterceptor,
+  Post,
+  UploadedFile,
+  UseInterceptors
+} from "@nestjs/common";
 import { FileInterceptor } from "@nestjs/platform-express";
 import { ApiBody, ApiConsumes, ApiTags } from "@nestjs/swagger";
 import { PhotoService } from "./photo.service";
 import { diskStorage } from "multer";
 import { extname } from "path";
 import * as fs from "fs";
+import {Observable} from "rxjs";
+
+@Injectable()
+export class FileExtender implements NestInterceptor {
+  intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
+    const req = context.switchToHttp().getRequest();
+    req.file['itemId'] = Number(req.body.itemId);
+    return next.handle();
+  }
+}
 
 @Controller("photo")
 @ApiTags("photo")
@@ -16,6 +35,7 @@ export class PhotoController {
     return __dirname + "/../../../uploads/";
   }
 
+
   @Post("upload")
   @ApiConsumes("multipart/form-data")
   @UseInterceptors(FileInterceptor("file", {
@@ -24,7 +44,7 @@ export class PhotoController {
       destination: (req, file, callback) => {
         const path = PhotoController.basePath + Math.round(Math.random() * 100);
 
-        fs.exists(path, function(exists) {
+        fs.exists(path, function(exists:boolean) {
           if (!exists) {
             fs.mkdirSync(path);
           }
@@ -37,7 +57,7 @@ export class PhotoController {
         });
       },
       filename: (req, file, func) => {
-        if (![".jpg", ".jpeg", ".png", ".gif"].includes(extname(file.originalname))) {
+        if (![".jpg", ".jpeg", ".png", ".gif", ".jfif"].includes(extname(file.originalname))) {
           func(new Error("it is not photo"), "");
           return;
         }
@@ -51,6 +71,7 @@ export class PhotoController {
     schema: {
       type: "object",
       properties: {
+        itemId: { type: 'integer' },
         file: {
           type: "string",
           format: "binary"
@@ -58,7 +79,13 @@ export class PhotoController {
       }
     }
   })
+
+
+
   async upload(@UploadedFile() file) {
-    console.log(file);
+    // console.log(file);
+    console.log(file.itemId);
+
+
   }
 }
