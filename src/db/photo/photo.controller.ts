@@ -14,13 +14,13 @@ import { PhotoService } from "./photo.service";
 import { diskStorage } from "multer";
 import { extname } from "path";
 import * as fs from "fs";
-import {Observable} from "rxjs";
+import { Observable } from "rxjs";
 
 @Injectable()
 export class FileExtender implements NestInterceptor {
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
     const req = context.switchToHttp().getRequest();
-    req.file['itemId'] = Number(req.body.itemId);
+    req.file["itemId"] = Number(req.body.itemId);
     return next.handle();
   }
 }
@@ -44,7 +44,7 @@ export class PhotoController {
       destination: (req, file, callback) => {
         const path = PhotoController.basePath + Math.round(Math.random() * 100);
 
-        fs.exists(path, function(exists:boolean) {
+        fs.exists(path, function(exists: boolean) {
           if (!exists) {
             fs.mkdirSync(path);
           }
@@ -71,7 +71,7 @@ export class PhotoController {
     schema: {
       type: "object",
       properties: {
-        itemId: { type: 'integer' },
+        itemId: { type: "integer" },
         file: {
           type: "string",
           format: "binary"
@@ -79,7 +79,6 @@ export class PhotoController {
       }
     }
   })
-
 
 
   async upload(@UploadedFile() file) {
