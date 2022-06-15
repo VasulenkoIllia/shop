@@ -17,6 +17,8 @@ import { OrderEntity } from "./db/order/order.entity";
 import { OrderItemModule } from "./db/order-item/order-item.module";
 import { OrderItemEntity } from "./db/order-item/order-item.entity";
 import { MulterModule } from "@nestjs/platform-express";
+import {ServeStaticModule} from "@nestjs/serve-static";
+import { join } from 'path';
 
 @Module({
   imports: [
@@ -38,8 +40,12 @@ import { MulterModule } from "@nestjs/platform-express";
     OrderModule,
     OrderItemModule,
     MulterModule.register({
-      dest: './files',
+      dest: join(__dirname, '..', 'uploads'),
+    }),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..'),
     })
+
 
   ],
   controllers: [AppController],

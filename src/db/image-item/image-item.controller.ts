@@ -47,8 +47,14 @@ export class ImageItemController {
                 HelpersService.checkAndCreateFolder(path)
                 callback(null, './uploads/' + endPath);
             },
-            filename: (req, file, func) => {
-                HelpersService.createFileName(req,file,func)
+            filename: (req, file, callback) => {
+                try {
+                    const name = HelpersService.createImageName(req,file);
+                    callback(null, name)
+                } catch (e) {
+                    callback(e, '')
+                }
+
             }
         })
     }))

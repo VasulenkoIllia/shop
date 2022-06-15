@@ -21,13 +21,12 @@ export class HelpersService {
         }
     }
 
-    static createFileName(req, file, func) {
+    static createImageName(req, file) {
         if (![".jpg", ".jpeg", ".png", ".gif", ".jfif"].includes(extname(file.originalname))) {
-            func(new Error("it is not photo"), "");
-            return;
+            throw new Error("it is not photo");
         }
         const randomName = Array(5).fill(null).map(() =>
             (Math.round(Math.random() * 5)).toString(5)).join("");
-        func(null, `${randomName}${extname(file.originalname)}`);
+        return `${randomName}${extname(file.originalname)}`;
     }
 }
