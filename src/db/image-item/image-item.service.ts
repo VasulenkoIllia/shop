@@ -44,8 +44,8 @@ export class ImageItemService {
         if (!image) {
             throw new Error('image do not found')
         }
-       fs.unlink(image.path,(e) => {
-            if (e){
+        fs.unlink(image.path, (e) => {
+            if (e) {
                 console.log(e)
             }
         })

@@ -1,17 +1,15 @@
-import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import {Column, Entity, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
 
-import { Items } from "../items/entities/item.entity";
+import {Items} from "../items/entities/item.entity";
 
 @Entity()
 export class ImageItemEntity {
-  @PrimaryGeneratedColumn()
-  id: number;
+    @PrimaryGeneratedColumn()
+    id: number;
 
-  @Column()
-  path: string;
+    @Column()
+    path: string;
 
-
-  @OneToOne(() => Items)
-  @JoinColumn()
-  item: Items;
+    @ManyToOne(() => Items, item => item.images, {onDelete: 'CASCADE'})
+    item: Items;
 }
