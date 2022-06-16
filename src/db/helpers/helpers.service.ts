@@ -32,11 +32,12 @@ export class HelpersService {
         return `${randomName}${extname(file.originalname)}`;
     }
 
-    static async checkTransmittedData(repository: Repository<any>, id): Promise<void> {
+    static async checkTransmittedData(repository: Repository<any>, id): Promise<any> {
         const data = await repository.findOne(id);
         if (!data) {
             throw new Error('Record by ID#' + id + ' do not found');
         }
+        return data
     }
 
     static async hashData(data: string) {
@@ -47,5 +48,7 @@ export class HelpersService {
     static checkHashData(hash, data): Promise<boolean> {
         return bcrypt.compare(data, hash);
     }
+
+
 
 }

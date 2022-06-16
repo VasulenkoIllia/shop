@@ -23,8 +23,11 @@ export class UsersService {
     }
 
     async findOne(id: number): Promise<UsersEntity> {
-        await HelpersService.checkTransmittedData(this.repository, id)
-        return this.repository.findOne(id);
+        return HelpersService.checkTransmittedData(this.repository, id)
+    }
+
+    async findByEmail(email: string): Promise<UsersEntity> {
+        return this.repository.findOne({email});
     }
 
     async remove(id: number): Promise<SuccessDto> {

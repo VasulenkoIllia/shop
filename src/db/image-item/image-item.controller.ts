@@ -71,9 +71,10 @@ export class ImageItemController {
     })
 
     async upload(@UploadedFile() file, @Body() data: CreateItemImageDto) {
+        const path = file.path
         return this.imageItemService.create({
             ...data,
-            path: file.path
+            path
         });
     }
 

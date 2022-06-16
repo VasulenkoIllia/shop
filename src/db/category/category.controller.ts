@@ -42,8 +42,7 @@ export class CategoryController {
     @Put('/:id')
     edit(
         @Param('id') id: number,
-        @Body() data: CreateCategoryDto,
-    ): Promise<Category> {
+        @Body() data: CreateCategoryDto,): Promise<Category> {
         return this.categoryService.edit(id, data);
     }
 

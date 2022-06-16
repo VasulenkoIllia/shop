@@ -4,6 +4,7 @@ import {UsersService} from "./users.service";
 import {CreateUsersDto} from "./dto/create-users.dto";
 import {UsersEntity} from "./users.entity";
 import {HelpersService} from "../helpers/helpers.service";
+
 @ApiTags('users')
 @Controller('users')
 export class UsersController {
@@ -11,7 +12,7 @@ export class UsersController {
     }
 
     @Post()
-    async create(@Body()  createUsersDto: CreateUsersDto) :Promise<CreateUsersDto>{
+    async create(@Body() createUsersDto: CreateUsersDto): Promise<CreateUsersDto> {
         const password = await HelpersService.hashData(createUsersDto.password)
         return this.usersService.create({
             ...createUsersDto,
@@ -20,14 +21,14 @@ export class UsersController {
     }
 
     @Get()
-    findAll():Promise<UsersEntity[]> {
+    findAll(): Promise<UsersEntity[]> {
         return this.usersService.findAll();
     }
 
     @Get(':id')
     async findOne(@Param('id') id: number): Promise<UsersEntity> {
         const user = await this.usersService.findOne(id);
-        if (user){
+        if (user) {
             return user;
         }
         throw new Error()
