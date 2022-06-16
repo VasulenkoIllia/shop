@@ -1,5 +1,7 @@
 import * as fs from "fs";
 import {extname} from "path";
+import {Repository} from "typeorm";
+import * as bcrypt from 'bcrypt';
 
 export class HelpersService {
 
@@ -29,4 +31,21 @@ export class HelpersService {
             (Math.round(Math.random() * 5)).toString(5)).join("");
         return `${randomName}${extname(file.originalname)}`;
     }
+
+    static async checkTransmittedData(repository: Repository<any>, id): Promise<void> {
+        const data = await repository.findOne(id);
+        if (!data) {
+            throw new Error('Record by ID#' + id + ' do not found');
+        }
+    }
+
+    static async hashData(data: string) {
+        const salt = await bcrypt.genSalt();
+        return bcrypt.hash(data, salt)
+    }
+
+    static checkHashData(hash, data): Promise<boolean> {
+        return bcrypt.compare(data, hash);
+    }
+
 }

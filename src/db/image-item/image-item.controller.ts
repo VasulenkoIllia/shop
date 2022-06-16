@@ -16,8 +16,6 @@ import {ImageItemService} from "./image-item.service";
 import {CreateItemImageDto} from "./dto/create-item-image.dto";
 import {FileInterceptor} from "@nestjs/platform-express";
 import {diskStorage} from "multer";
-import * as fs from "fs";
-import {extname} from "path";
 import {Observable} from "rxjs";
 import {HelpersService} from "../helpers/helpers.service";
 
