@@ -10,6 +10,7 @@ export class AuthService {
         private readonly jwtService: JwtService,
     ) {
     }
+
     async validateUser(email: string, password: string): Promise<any> {
         const user = await this.usersService.findByEmail(email);
         if (await HelpersService.checkHashData(user.password, password)) {
