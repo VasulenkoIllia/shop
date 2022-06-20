@@ -33,9 +33,10 @@ export class AuthController {
             }
         }
     })
+    // @ApiConsumes("multipart/form-data")
     @UseGuards(LocalAuthGuard)
     @Post("/login")
-    login(@Request() req) {
+    async login(@Request() req) {
         const {access_token} = this.authService.login(req.user);
         return {
             ...req.user,
@@ -43,15 +44,7 @@ export class AuthController {
         };
     }
 
-
-    @ApiBody({
-        schema: {
-            type: "object",
-            properties: {
-                token: {type: "string"},
-            }
-        }
-    })
+    @ApiConsumes("multipart/form-data")
     @UseGuards(JwtAuthGuard)
     @Get("profile")
     getProfile(@Request() req) {
