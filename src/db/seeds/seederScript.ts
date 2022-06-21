@@ -1,7 +1,8 @@
 import { seeder } from "nestjs-seeder";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { Page } from "./page.entity";
-
+import { Page } from "../page/page.entity";
+import { PageSeeder} from "./seeder"
+import { UsersEntity } from "../users/users.entity";
 seeder({
   imports: [
     TypeOrmModule.forRoot({
@@ -15,4 +16,4 @@ seeder({
       synchronize: true
     }),
     TypeOrmModule.forFeature([Page])]
-}).run([Page]);
+}).run([PageSeeder]);

@@ -1,9 +1,9 @@
-import { ApiProperty } from "@nestjs/swagger";
+import { ApiProperty } from '@nestjs/swagger';
 
-export class CreateItemImageDto{
+export class CreateItemImageDto {
   @ApiProperty()
-  path: string
+  path: string;
 
   @ApiProperty()
-  itemId: number
+  itemId: number;
 }

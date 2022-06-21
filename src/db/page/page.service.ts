@@ -1,18 +1,16 @@
-import { Injectable } from "@nestjs/common";
-import { InjectRepository } from "@nestjs/typeorm";
-import { Repository } from "typeorm";
-import { Page } from "./page.entity";
-import { CreatePageDto } from "./page.dto";
-import { SuccessDto } from "../../dto/success.dto";
+import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Page } from './page.entity';
+import { CreatePageDto } from './page.dto';
+import { SuccessDto } from '../../dto/success.dto';
 
 @Injectable()
 export class PageService {
   constructor(
     @InjectRepository(Page)
-    private readonly pageRepository: Repository<Page>
-  ) {
-  }
-
+    private readonly pageRepository: Repository<Page>,
+  ) {}
 
   async all(): Promise<Page[]> {
     return this.pageRepository.find();
@@ -37,22 +35,22 @@ export class PageService {
   async edit(id: number, data: CreatePageDto): Promise<Page> {
     const page = await this.pageRepository.findOne(id);
     if (!page) {
-      throw new Error("Page do not found");
+      throw new Error('Page do not found');
     }
     return this.pageRepository.save({
       ...page,
-      ...data
+      ...data,
     });
   }
 
   async delete(id: number): Promise<SuccessDto> {
     const page = await this.pageRepository.findOne(id);
     if (!page) {
-      throw new Error("Page do not found");
+      throw new Error('Page do not found');
     }
     const result = await this.pageRepository.delete(id);
     return {
-      success: result.affected > 0
+      success: result.affected > 0,
     };
   }
 }
