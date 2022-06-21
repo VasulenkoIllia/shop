@@ -1,6 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 import { Factory } from 'nestjs-seeder';
-import { faker } from '@faker-js/faker/locale/de';
 
 @Entity()
 export class Page {

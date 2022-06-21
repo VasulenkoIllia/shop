@@ -1,6 +1,4 @@
-import { Factory } from 'nestjs-seeder';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-import { faker } from '@faker-js/faker/locale/de';
 
 export enum UserRole {
   ADMIN = 'admin',

@@ -10,7 +10,7 @@ import {
 import { CategoryService } from './category.service';
 import { Category } from './category.entity';
 import { CreateCategoryDto } from './category.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { SuccessDto } from '../../dto/success.dto';
 
 @ApiTags('category')
@@ -18,6 +18,7 @@ import { SuccessDto } from '../../dto/success.dto';
 export class CategoryController {
   constructor(private readonly categoryService: CategoryService) {}
 
+  @ApiBearerAuth()
   @Get()
   findAll(): Promise<Category[]> {
     return this.categoryService.findAll();
