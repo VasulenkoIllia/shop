@@ -22,6 +22,8 @@ import { join } from "path";
 import { UsersEntity } from "./db/users/users.entity";
 import { UsersModule } from "./db/users/users.module";
 import { AuthModule } from "./db/auth/auth.module";
+import { RolesGuard } from "./db/roles/roles.guard";
+import { APP_GUARD } from "@nestjs/core";
 
 @Module({
   imports: [
